@@ -1,0 +1,54 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<h3>Notes</h3>
+<hr />
+
+@if(ViewBag.Notes.Count == 0)
+{
+    <p>No notes found in the database</p>
+}
+
+<div class="form-group">
+    <div>
+        <a href="@Url.Action("Add")">
+            <button class="btn btn-success">
+                <i class="glyphicon glyphicon-plus"></i>Add Note
+                <span class="sr-only">Edit</span>
+            </button>
+        </a>
+    </div>
+</div>
+@if (ViewBag.Notes.Count != 0)
+{
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th width="80%">Note</th>
+            <th width="10%">Created</th>
+            <th width="10%"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var note in ViewBag.Notes)
+        {
+            <tr>
+                <td>@note.Text</td>
+                <td>@note.CreatedOn.ToString("MMM-dd-yyyy")</td>
+                <td>
+                    <a href="@Url.Action("Update", new { id = note.Id })">
+                        <i class="glyphicon glyphicon-pencil"></i>
+                        <span class="sr-only">Edit</span>
+                    </a>
+                    <a href="@Url.Action("Delete", new { id = note.Id })" style="margin-left:10px">
+                        <i class="glyphicon glyphicon-trash"></i>
+                        <span class="sr-only">Edit</span>
+                    </a>
+                </td>
+            </tr>
+
+        }
+    </tbody>
+</table>
+}

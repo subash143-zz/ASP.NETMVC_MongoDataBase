@@ -1,0 +1,24 @@
+﻿@model Project.Service.Note
+@{
+    ViewBag.Title = "Add Note";
+}
+<h3>@ViewBag.Title</h3>
+<hr />
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        <label for="Text">Note:</label>
+        @Html.TextAreaFor(model => model.Text, new { @class = "required", @cols = "20", @rows = "10", @style = "width:100% !important" })
+        @Html.ValidationMessageFor(model => model.Text)
+    </div>
+
+    <div class="form-group">
+        <div>
+            <input type="submit" value="Create" class="btn btn-success" />
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    </div>
+}
